@@ -2,7 +2,10 @@ const fs = require('fs');
 
 const day = Number(process.argv[2])
 const path = `./day${day}`
-const text = fs.readFileSync(path + '/input.txt').toString().split('\n')
+const text = fs.readFileSync(path + '/input.txt')
+    .toString()
+    .split('\n')
+    .filter(s => s.length > 0)
 
 const solver = require(path + '/solver')
 for(let part of [1,2]) {
