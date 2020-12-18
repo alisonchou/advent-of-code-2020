@@ -8,7 +8,7 @@ const solver = require(path + '/solver')
 for(let part of [1,2]) {
     const answer = solver.solve(text, part)
     const expected = solver.expected(part)
-    if (expected) {
+    if (answer === expected) {
         console.log(`Correct: ${day} part ${part}: ${answer}`)
     } else {
         console.log(`Incorrect: ${day} part ${part}: ${answer} - expected ${expected}`)
