@@ -8,7 +8,7 @@ const text = fs.readFileSync(path + '/input.txt')
     .filter(s => s.length > 0)
 
 const solver = require(path + '/solver')
-for(let part of [1,2]) {
+for (let part of [1,2]) {
     const answer = solver.solve(text, part)
     const expected = solver.expected(part)
     if (answer === expected) {

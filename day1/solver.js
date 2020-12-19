@@ -30,6 +30,6 @@ function solve(input, part) {
     }
 }
 
-const expected = (part) => part === 1 ? 651651 : 214486272
+const expected = part => part === 1 ? 651651 : 214486272
 
 module.exports = { solve, expected }
