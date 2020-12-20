@@ -12,17 +12,17 @@ const text = () => {
             .filter(s => s.length > 0)
             .map(item => {
                 let obj = {}
-                item.split(/\n| /).filter(s => s !== '') // [[[byr:2020]],[[iyr:1954]]]
+                item.split(/\n| /).filter(s => s !== '')
                     .map(field => {
                         const colonIndex = field.indexOf(':')
                         obj[field.substring(0, colonIndex)] = field.substring(colonIndex+1)
-                        //field.split(':')
-                    }) // [[[byr],[2020]],[[iyr],[1954]]]
+                    })
                 return obj
             })
     } else {
         return fileText
             .split('\n')
+            .map(s => s.replace(/\r$/, ''))
             .filter(s => s.length > 0)
     }
 }
