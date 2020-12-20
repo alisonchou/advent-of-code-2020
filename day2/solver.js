@@ -13,8 +13,8 @@ function solve(input, part) {
         }, 0)
     } else {
         return parsedInput.reduce((total, line) => {
-            const firstIndex = (line[2][line[0][0] - 1] === line[1])
-            const secondIndex = (line[2][line[0][1] - 1] === line[1])
+            const firstIndex = line[2][line[0][0] - 1] === line[1]
+            const secondIndex = line[2][line[0][1] - 1] === line[1]
             return firstIndex && !secondIndex || !firstIndex && secondIndex ? total + 1 : total
         }, 0)
     }
