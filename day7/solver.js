@@ -29,8 +29,8 @@ function solve(input, part) {
         outsideBags(['shiny gold bags'])
         return ([...new Set(totalBags)].length)
     } else {
-        const insideBags = item =>
-            parsedInput[item].reduce((sum, bag) =>
+        const insideBags = outerBag =>
+            parsedInput[outerBag].reduce((sum, bag) =>
                 bag !== 'no other bags' ? sum + bag[0] + bag[0] * insideBags(bag[1]) : sum + 0
             , 0)
         return insideBags('shiny gold bags')
