@@ -1,5 +1,15 @@
 function solve(input, part) {
-    return input.reduce((total, entry, index) => {
+    return input
+        .map(item => {
+            let obj = {}
+            item.split(/\n| /).filter(s => s !== '')
+                .map(field => {
+                    const colonIndex = field.indexOf(':')
+                    obj[field.substring(0, colonIndex)] = field.substring(colonIndex+1)
+                })
+            return obj
+        })
+        .reduce((total, entry, index) => {
         const count = Object.keys(entry).length
         if (count === 8 || (count === 7 && !entry.hasOwnProperty('cid'))) {
             if (part === 1) {

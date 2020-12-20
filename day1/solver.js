@@ -1,7 +1,7 @@
 function solve(input, part) {
     const numInput = input.map(line => Number(line)).sort((a, b) => a - b);
     const binarySearch = (array, target, start = 0, end = array.length-1) => {
-        const midpoint = ~~(start + (end - start) / 2)
+        const midpoint = ~~((start + end) / 2)
         const midpointVal = array[midpoint]
         if (midpointVal === target) {
             return true

@@ -4,25 +4,15 @@ const inputs = process.argv.slice(2)
 const day = Number(inputs[0])
 
 const path = `./day${day}`
-const fileText = fs.readFileSync(path + '/input.txt').toString()
+const fileText = fs.readFileSync(path + '/input.txt').toString().replace(/\r/g, '')
 const text = () => {
-    if (day === 4) {
+    if (day === 4 || day === 6) {
         return fileText
             .split('\n\n')
             .filter(s => s.length > 0)
-            .map(item => {
-                let obj = {}
-                item.split(/\n| /).filter(s => s !== '')
-                    .map(field => {
-                        const colonIndex = field.indexOf(':')
-                        obj[field.substring(0, colonIndex)] = field.substring(colonIndex+1)
-                    })
-                return obj
-            })
     } else {
         return fileText
             .split('\n')
-            .map(s => s.replace(/\r$/, ''))
             .filter(s => s.length > 0)
     }
 }
@@ -39,9 +29,8 @@ const runPart = part => {
 }
 
 if (inputs.length === 1) {
-    for (let part of [1, 2]) {
-        runPart(part)
-    }
+    runPart(1)
+    runPart(2)
 } else {
     runPart(Number(inputs[1]))
 }
