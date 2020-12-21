@@ -16,11 +16,12 @@ function solve(input, part) {
     if (part === 1) {
         let totalBags = []
         const outsideBags = possibleBags => {
-            const validBags = Object.keys(input).reduce((bags, currBag) =>
+            const validBags =
+                Object.keys(input).reduce((bags, currBag) =>
                     input[currBag].find(incBags =>
-                    possibleBags.find(req => incBags[1] === req)
-                ) ? [...bags, currBag] : bags
-            , [])
+                        possibleBags.find(req => incBags[1] === req)
+                    ) ? [...bags, currBag] : bags
+                , [])
             if (validBags.length > 0) {
                 totalBags = totalBags.concat(validBags)
                 outsideBags(validBags)

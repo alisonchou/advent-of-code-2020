@@ -30,11 +30,7 @@ function solve(input, part) {
             const newInput = input.map(s => [s[0].replace(/nop|jmp/g, match => {
                 occIndex++
                 if (occIndex === count) {
-                    if (match === 'nop') {
-                        return 'jmp'
-                    } else if (match === 'jmp') {
-                        return 'nop'
-                    }
+                    return match === 'nop' ? 'jmp' : 'nop'
                 } else {
                     return match
                 }
