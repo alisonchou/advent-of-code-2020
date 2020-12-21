@@ -1,5 +1,5 @@
 function solve(input, part) {
-    const parsedInput = input.map(line => line.split(''))
+    input = input.map(line => line.split(''))
     const traverser = (right, down = 1) => {
         let index = -right
         const traverseArray = arr => arr.map(line => {
@@ -10,9 +10,9 @@ function solve(input, part) {
             return line[index]
         }).reduce((sum, curr) => curr === '#' ? sum + 1 : sum, 0)
         if (down > 1) {
-            return traverseArray(parsedInput.filter((row, index) => (index + 1) % down !== 0))
+            return traverseArray(input.filter((row, index) => (index + 1) % down !== 0))
         } else {
-            return traverseArray(parsedInput)
+            return traverseArray(input)
         }
     }
     if (part === 1) {

@@ -1,8 +1,7 @@
 function solve(input, part) {
-    let parsedInput = {}
-    input.forEach(line => {
+    input = input.reduce((arr, line) => {
         const splitContain = line.split(' contain ')
-        parsedInput[splitContain[0]] = splitContain[1].slice(0, -1).split(', ').map(part => {
+        arr[splitContain[0]] = splitContain[1].slice(0, -1).split(', ').map(part => {
             const num = part.slice(0, 1)
             if (num === 'n') {
                 return part
@@ -12,12 +11,13 @@ function solve(input, part) {
                 return [Number(num), part.slice(2).concat('s')]
             }
         })
-    })
+        return arr
+    }, {})
     if (part === 1) {
         let totalBags = []
         const outsideBags = possibleBags => {
-            const validBags = Object.keys(parsedInput).reduce((bags, currBag) =>
-                parsedInput[currBag].find(incBags =>
+            const validBags = Object.keys(input).reduce((bags, currBag) =>
+                    input[currBag].find(incBags =>
                     possibleBags.find(req => incBags[1] === req)
                 ) ? [...bags, currBag] : bags
             , [])
@@ -30,7 +30,7 @@ function solve(input, part) {
         return ([...new Set(totalBags)].length)
     } else {
         const insideBags = outerBag =>
-            parsedInput[outerBag].reduce((sum, bag) =>
+            input[outerBag].reduce((sum, bag) =>
                 bag !== 'no other bags' ? sum + bag[0] + bag[0] * insideBags(bag[1]) : sum + 0
             , 0)
         return insideBags('shiny gold bags')

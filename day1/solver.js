@@ -1,5 +1,5 @@
 function solve(input, part) {
-    const numInput = input.map(line => Number(line)).sort((a, b) => a - b);
+    input = input.map(line => Number(line)).sort((a, b) => a - b)
     const binarySearch = (array, target, start = 0, end = array.length-1) => {
         const midpoint = ~~((start + end) / 2)
         const midpointVal = array[midpoint]
@@ -14,20 +14,18 @@ function solve(input, part) {
         }
     }
     const multiplier = (product, next) => product * next
-    if (part === 1) {
-        return numInput
-            .filter(line => binarySearch(numInput, 2020-line))
-            .reduce(multiplier, 1)
-    } else {
-        return numInput
-            .filter(line =>
-                numInput.filter(secondLine => {
+    return input
+        .filter(line => {
+            if (part === 1) {
+                return binarySearch(input, 2020 - line)
+            } else {
+                return input.filter(secondLine => {
                     const diff = 2020 - line - secondLine
-                    return diff > 0 && binarySearch(numInput, diff)
+                    return diff > 0 && binarySearch(input, diff)
                 }).length > 0
-            )
-            .reduce(multiplier, 1)
-    }
+            }
+        })
+        .reduce(multiplier, 1)
 }
 
 const expected = part => part === 1 ? 651651 : 214486272

@@ -1,5 +1,5 @@
 function solve(input, part) {
-    const parsedInput = input.map(line => {
+    input = input.map(line => {
         const lineArr = line.split('')
         return [lineArr.slice(0, 7), lineArr.slice(7)]
     })
@@ -17,12 +17,12 @@ function solve(input, part) {
     }
     const calcId = array => findSeat(array[0]) * 8 + findSeat(array[1], 7)
     if (part === 1) {
-        return parsedInput.reduce((highest, line) => {
+        return input.reduce((highest, line) => {
             const seatId = calcId(line)
             return seatId > highest ? seatId : highest
         }, -1)
     } else {
-        const seatIds = parsedInput.reduce((array, line) => {
+        const seatIds = input.reduce((array, line) => {
             const seatId = calcId(line)
             return array.indexOf(seatId) === -1 ? [...array, seatId] : array
         }, []).sort()
