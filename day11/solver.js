@@ -42,7 +42,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0] - 1][indexes[1]] === '#'
             }
-        } else if (direction === "bottom") {
+        } else if (direction === "btm") {
             if (view) {
                 for (let i = indexes[0] + 1; i < array.length; i++) {
                     if (array[i][indexes[1]] === '#') {
@@ -127,7 +127,7 @@ function solve(input, part) {
                     ) && (rowIndex === lastRow ||
                         (
                             (seatIndex === 0 || !hasOcc([rowIndex, seatIndex], 'btmLeft', array, view))
-                            &&  !hasOcc([rowIndex, seatIndex], 'bottom', array, view)
+                            &&  !hasOcc([rowIndex, seatIndex], 'btm', array, view)
                             && (seatIndex === lastCol || !hasOcc([rowIndex, seatIndex], 'btmRight', array, view))
                         )
                     )
@@ -150,43 +150,37 @@ function solve(input, part) {
             row.forEach((seat, seatIndex) => {
                 let adjOccupied = 0
                 if (seat === '#') {
-                    if (rowIndex !== 0 && hasOcc([rowIndex, seatIndex], 'top', array, view)) {
+                    if (seatIndex !== 0 && hasOcc([rowIndex, seatIndex], 'left', array, view)) {
                         adjOccupied += 1
                     }
-                    if (rowIndex !== lastRow && hasOcc([rowIndex, seatIndex], 'bottom', array, view)) {
+                    if (seatIndex !== lastCol && hasOcc([rowIndex, seatIndex], 'right', array, view)) {
                         adjOccupied += 1
                     }
-                    if (seatIndex !== 0) {
-                        if (hasOcc([rowIndex, seatIndex], 'left', array, view)) {
+                    if (rowIndex !== 0) {
+                        if (seatIndex !== 0 && hasOcc([rowIndex, seatIndex], 'topLeft', array, view)) {
                             adjOccupied += 1
                         }
-                        if (rowIndex !== 0 && hasOcc([rowIndex, seatIndex], 'topLeft', array, view)) {
+                        if (hasOcc([rowIndex, seatIndex], 'top', array, view)) {
                             adjOccupied += 1
                         }
-                        if (rowIndex !== lastRow && hasOcc([rowIndex, seatIndex], 'btmLeft', array, view)) {
+                        if (seatIndex !== lastCol && hasOcc([rowIndex, seatIndex], 'topRight', array, view)) {
                             adjOccupied += 1
                         }
                     }
-                    if (seatIndex !== lastCol) {
-                        if (hasOcc([rowIndex, seatIndex], 'right', array, view)) {
+                    if (rowIndex !== lastRow) {
+                        if (seatIndex !== 0 && hasOcc([rowIndex, seatIndex], 'btmLeft', array, view)) {
                             adjOccupied += 1
                         }
-                        if (rowIndex !== 0 && hasOcc([rowIndex, seatIndex], 'topRight', array, view)) {
+                        if (hasOcc([rowIndex, seatIndex], 'btm', array, view)) {
                             adjOccupied += 1
                         }
-                        if (rowIndex !== lastRow && hasOcc([rowIndex, seatIndex], 'btmRight', array, view)) {
+                        if (seatIndex !== lastCol && hasOcc([rowIndex, seatIndex], 'btmRight', array, view)) {
                             adjOccupied += 1
                         }
                     }
                 }
-                if (view) {
-                    if (adjOccupied >= 5) {
-                        newArray[rowIndex][seatIndex] = 'L'
-                    }
-                } else {
-                    if (adjOccupied >= 4) {
-                        newArray[rowIndex][seatIndex] = 'L'
-                    }
+                if ((view && adjOccupied >= 5) || (!view && adjOccupied >= 4)) {
+                    newArray[rowIndex][seatIndex] = 'L'
                 }
             })
         })
