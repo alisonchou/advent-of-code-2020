@@ -8,5 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "alisonchou",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cuint": "^0.2.2"
+  }
 }
