@@ -37,8 +37,8 @@ function solve(input, part) {
         })
         return Math.abs(position[1]) + Math.abs(position[2])
     } else {
-        let position = [0, 0] //  e, n
-        let waypoint = [10, 1] // e, n
+        let position = [0, 0]
+        let waypoint = [10, 1]
         input.forEach(instruction => {
             if (instruction[0] === 'F') {
                 position = [move(position, 1, waypoint[0], instruction[1])[0],
