@@ -30,17 +30,17 @@ function solve(input, part) {
             if (splitEqual[0] !== 'mask') {
                 splitEqual[0] = splitEqual[0].slice(splitEqual[0].indexOf('[') + 1, splitEqual[0].length - 1)
             } else {
-                let arrayBegin = ['']
+                let invMask = []
                 splitEqual[1].split('').forEach(s => {
                     if (s === 'X') {
-                        arrayBegin = arrayBegin.map(mask => mask + '0').concat(arrayBegin.map(mask => mask + '1'))
+                        invMask = invMask.map(mask => mask + '0').concat(invMask.map(mask => mask + '1'))
                     } else if (s === '0') {
-                        arrayBegin = arrayBegin.map(mask => mask + 'x')
+                        invMask = invMask.map(mask => mask + 'x')
                     } else if (s.length > 0) {
-                        arrayBegin = arrayBegin.map(mask => mask + s)
+                        invMask = invMask.map(mask => mask + s)
                     }
                 })
-                splitEqual[1] = arrayBegin.map(s => ['mask', s.replace(/x/g, '0'),
+                splitEqual[1] = invMask.map(s => ['mask', s.replace(/x/g, '0'),
                     s.replace(/x/g, '1')])
             }
             return splitEqual
