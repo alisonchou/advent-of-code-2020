@@ -6,7 +6,7 @@ function solve(input, part) {
             secondBool & seat === arr2[index][seatIndex], true)
             , true)
     const hasOcc = (indexes, direction, array, view) => {
-        if (direction === "left") {
+        if (direction === 'left') {
             if (view) {
                 for (let i = indexes[1] - 1; i >= 0; i--) {
                     if (array[indexes[0]][i] === '#') {
@@ -18,7 +18,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0]][indexes[1] - 1] === '#'
             }
-        } else if (direction === "right") {
+        } else if (direction === 'right') {
             if (view) {
                 for (let i = indexes[1] + 1; i < array[0].length; i++) {
                     if (array[indexes[0]][i] === '#') {
@@ -30,7 +30,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0]][indexes[1] + 1] === '#'
             }
-        } else if (direction === "top") {
+        } else if (direction === 'top') {
             if (view) {
                 for (let i = indexes[0] - 1; i >= 0; i--) {
                     if (array[i][indexes[1]] === '#') {
@@ -42,7 +42,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0] - 1][indexes[1]] === '#'
             }
-        } else if (direction === "btm") {
+        } else if (direction === 'btm') {
             if (view) {
                 for (let i = indexes[0] + 1; i < array.length; i++) {
                     if (array[i][indexes[1]] === '#') {
@@ -54,7 +54,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0] + 1][indexes[1]] === '#'
             }
-        } else if (direction === "topLeft") {
+        } else if (direction === 'topLeft') {
             if (view) {
                 for (let i = indexes[0] - 1, j = indexes[1] - 1; i >= 0 && j >= 0; i--, j--) {
                     const elem = array[i][j]
@@ -67,7 +67,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0] - 1][indexes[1] - 1] === '#'
             }
-        } else if (direction === "btmLeft") {
+        } else if (direction === 'btmLeft') {
             if (view) {
                 for (let i = indexes[0] + 1, j = indexes[1] - 1; i < array.length && j >= 0; i++, j--) {
                     const elem = array[i][j]
@@ -80,7 +80,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0] + 1][indexes[1] - 1] === '#'
             }
-        } else if (direction === "topRight") {
+        } else if (direction === 'topRight') {
             if (view) {
                 for (let i = indexes[0] - 1, j = indexes[1] + 1; i >= 0 && j < array[0].length; i--, j++) {
                     const elem = array[i][j]
@@ -93,7 +93,7 @@ function solve(input, part) {
             } else {
                 return array[indexes[0] - 1][indexes[1] + 1] === '#'
             }
-        } else if (direction === "btmRight") {
+        } else if (direction === 'btmRight') {
             if (view) {
                 for (let i = indexes[0] + 1, j = indexes[1] + 1; i < array.length && j < array[0].length; i++, j++) {
                     const elem = array[i][j]

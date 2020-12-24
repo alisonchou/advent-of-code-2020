@@ -10,6 +10,7 @@
   "author": "alisonchou",
   "license": "MIT",
   "dependencies": {
-    "cuint": "^0.2.2"
+    "cuint": "^0.2.2",
+    "megahash": "^1.0.4"
   }
 }
