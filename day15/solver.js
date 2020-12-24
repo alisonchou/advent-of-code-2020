@@ -2,7 +2,7 @@ const MegaHash = require('megahash')
 
 function solve(input, part) {
     input = input[0].split(',')
-    const hashNumSeq = len => {
+    const numSeq = len => {
         let prevNum
         let prevNums = new MegaHash()
         for (let i = 0; i < len; i++) {
@@ -27,9 +27,9 @@ function solve(input, part) {
         return prevNum
     }
     if (part === 1) {
-        return hashNumSeq(2020)
+        return numSeq(2020)
     } else {
-        return hashNumSeq(30000000)
+        return numSeq(30000000)
     }
 }
 
