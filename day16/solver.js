@@ -31,12 +31,12 @@ function solve(input, part) {
         for (let field = 0; field < input[2][0].length; field++) {
             let eligibleFields = null
             for (let ticket = 0; ticket < input[2].length; ticket++) {
-                const ticketVal = input[2][ticket][field]
-                if (nums[ticketVal] != null && nums[ticketVal].length > 0) {
+                const ticketVal = nums[input[2][ticket][field]]
+                if (ticketVal != null && ticketVal.length > 0) {
                     if (eligibleFields == null) {
-                        eligibleFields = nums[ticketVal].map(f => f[0])
+                        eligibleFields = ticketVal.map(f => f[0])
                     } else {
-                        eligibleFields = eligibleFields.filter(s => nums[ticketVal].find(f => f[0] === s))
+                        eligibleFields = eligibleFields.filter(s => ticketVal.find(f => f[0] === s))
                     }
                 }
             }
