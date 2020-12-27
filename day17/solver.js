@@ -1,50 +1,36 @@
 function solve(input, part) {
-    const planeSearcher = (plane, row, col, addSelf = true) => {
-        let planeActives = 0
-        if (addSelf && plane[row][col] === '#') {
-            planeActives++
-        }
-        if (plane[row][col + 1] === '#') {
-            planeActives++
-        }
-        if (plane[row][col - 1] === '#') {
-            planeActives++
-        }
-        if (plane[row + 1] != null) {
-            if (plane[row + 1][col] === '#') {
-                planeActives++
+    const searcher = (fourth, plane, row, col, addSelf) => {
+        const planeSearcher = (plane, row, col, addSelf) => {
+            const itemSearcher = (addRow, addSelf = true) => {
+                if (addSelf && plane[row + addRow][col] === '#') {
+                    actives++
+                }
+                if (plane[row + addRow][col + 1] === '#') {
+                    actives++
+                }
+                if (plane[row + addRow][col - 1] === '#') {
+                    actives++
+                }
             }
-            if (plane[row + 1][col + 1] === '#') {
-                planeActives++
+            itemSearcher(0, addSelf)
+            if (plane[row + 1] != null) {
+                itemSearcher(1)
             }
-            if (plane[row + 1][col - 1] === '#') {
-                planeActives++
-            }
-        }
-        if (plane[row - 1] != null) {
-            if (plane[row - 1][col] === '#') {
-                planeActives++
-            }
-            if (plane[row - 1][col + 1] === '#') {
-                planeActives++
-            }
-            if (plane[row - 1][col - 1] === '#') {
-                planeActives++
+            if (plane[row - 1] != null) {
+                itemSearcher(-1)
             }
         }
-        return planeActives
-    }
-    const searcher = (fourth, plane, row, col, addSelf = true) => {
-        let actives = planeSearcher(fourth[plane], row, col, addSelf)
+        let actives = 0
+        planeSearcher(fourth[plane], row, col, addSelf)
         if (fourth[plane + 1] != null) {
-            actives += planeSearcher(fourth[plane + 1], row, col)
+            planeSearcher(fourth[plane + 1], row, col)
         }
         if (fourth[plane - 1] != null) {
-            actives += planeSearcher(fourth[plane - 1], row, col)
+            planeSearcher(fourth[plane - 1], row, col)
         }
         return actives
     }
-    const addInactive = fourth => {
+    const addDims = fourth => {
         fourth = fourth.map(plane => {
             plane = plane.map(row => {
                 row.unshift('.')
@@ -59,11 +45,11 @@ function solve(input, part) {
         fourth.push(new Array(fourth[0].length).fill(new Array(fourth[0][0].length).fill('.')))
         return fourth
     }
+    input = [input.map(line => line.split(''))]
+    let newArray
     if (part === 1) {
-        input = [input.map(line => line.split(''))]
-        let newArray
         for (let i = 0; i < 6; i++) {
-            input = addInactive(input)
+            input = addDims(input)
             newArray = JSON.parse(JSON.stringify(input))
             for (let plane = 0; plane < input.length; plane++) {
                 for (let row = 0; row < input[0].length; row++) {
@@ -88,10 +74,9 @@ function solve(input, part) {
         return input.reduce((sum, plane) => sum + plane.reduce((planeSum, row) =>
             planeSum + row.reduce((rowSum, item) => item === '#' ? rowSum + 1 : rowSum, 0), 0), 0)
     } else {
-        input = [[input.map(line => line.split(''))]]
-        let newArray
+        input = [input]
         for (let i = 0; i < 6; i++) {
-            input = input.map(fourth => addInactive(fourth))
+            input = input.map(fourth => addDims(fourth))
             input.unshift(new Array(input[0].length).fill(new Array(input[0][0].length).fill(new Array(input[0][0][0].length).fill('.'))))
             input.push(new Array(input[0].length).fill(new Array(input[0][0].length).fill(new Array(input[0][0][0].length).fill('.'))))
             newArray = JSON.parse(JSON.stringify(input))
@@ -122,8 +107,7 @@ function solve(input, part) {
             input = JSON.parse(JSON.stringify(newArray))
         }
         return input.reduce((sum, fourth) =>
-            sum + fourth.reduce((fourthSum, plane) =>
-            fourthSum + plane.reduce((planeSum, row) =>
+            sum + fourth.reduce((fourthSum, plane) => fourthSum + plane.reduce((planeSum, row) =>
             planeSum + row.reduce((rowSum, item) => item === '#' ? rowSum + 1 : rowSum, 0), 0), 0), 0)
     }
 }
