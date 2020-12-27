@@ -56,8 +56,6 @@ function solve(input, part) {
                     for (let col = 0; col < input[0][0].length; col++) {
                         let actives = searcher(input, plane, row, col, false)
                         if (input[plane][row][col] === '#') {
-                            if (row === 1 && col === 0) {
-                            }
                             if (actives !== 2 && actives !== 3) {
                                 newArray[plane][row][col] = '.'
                             }
