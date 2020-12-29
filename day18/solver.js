@@ -64,7 +64,7 @@ function solve(input, part) {
                 }
                 return false
             }
-            const mather = (arr, curr, operator, inParen = false) => {
+            const doMath = (arr, curr, operator, inParen = false) => {
                 if (operator === '') {
                     arr.push(curr)
                 } else if ((!inParen && arr.length === 3) || (inParen && arr.length === 4)) {
@@ -96,10 +96,10 @@ function solve(input, part) {
             while (i < line.length) {
                 if (typeof line[i] === 'number') {
                     if (parenResults.length === 0) {
-                        lineTotal = mather(lineTotal, line[i], operator)
+                        lineTotal = doMath(lineTotal, line[i], operator)
                     } else {
                         parenResults[parenResults.length - 1] =
-                            mather(parenResults[parenResults.length - 1], line[i], operator, true)
+                            doMath(parenResults[parenResults.length - 1], line[i], operator, true)
                     }
                 } else if (line[i] === '(') {
                     const prevOp = line[i - 1]
@@ -109,10 +109,10 @@ function solve(input, part) {
                     const popped = parenResults.pop()
                     const res = (popped[0] || 1) * (popped[1] || 1)
                     if (parenResults.length === 0) {
-                        lineTotal = mather(lineTotal, res, popped[2])
+                        lineTotal = doMath(lineTotal, res, popped[2])
                     } else {
                         parenResults[parenResults.length - 1] =
-                            mather(parenResults[parenResults.length - 1], res, popped[2], true)
+                            doMath(parenResults[parenResults.length - 1], res, popped[2], true)
                     }
                 } else {
                     operator = line[i]
