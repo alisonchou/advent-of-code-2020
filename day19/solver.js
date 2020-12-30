@@ -36,11 +36,11 @@ function solve(input, part) {
         const matches42 = evalRule('42')
         const matches31 = evalRule('31')
         const increment = matches31[0].length
-        return input[1].reduce((sum, match) => {
+        return input[1].reduce((sum, line) => {
             let on31 = false
             let num42 = 0, num31 = 0
-            for (let i = 0; i < match.length; i += increment) {
-                const part = match.slice(i, i + increment)
+            for (let i = 0; i < line.length; i += increment) {
+                const part = line.slice(i, i + increment)
                 if (!on31) {
                     if (matches42.indexOf(part) !== -1) {
                         num42++
