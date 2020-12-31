@@ -6,7 +6,7 @@ const day = Number(inputs[0])
 const path = `./day${day}`
 const fileText = fs.readFileSync(path + '/input.txt').toString().replace(/\r/g, '')
 const text = () => {
-    if (day === 4 || day === 6 || day === 16 || day === 19) {
+    if (day === 4 || day === 6 || day === 16 || day === 19 || day === 20) {
         return fileText
             .split('\n\n')
             .filter(s => s.length > 0)
