@@ -7,8 +7,8 @@ function solve(input, part) {
         return tile
     })
     const edgeLen = Math.sqrt(input.length)
-    const rotateRight = tile => tile[0].map((_, colIndex) =>
-        tile.map(row => row[colIndex])).map(row => row.reverse())
+    const rotateRight = tile =>
+        tile[0].map((_, colIndex) => tile.map(row => row[colIndex])).map(row => row.reverse())
     const flip = tile => tile.reverse()
     const same = tile => tile
     const actions = [
@@ -57,7 +57,7 @@ function solve(input, part) {
         return valid[0][0] * valid[edgeLen - 1][0] * valid[valid.length - edgeLen][0] * valid[valid.length - 1][0]
     } else {
         const longest = seaMonster.reduce((max, row) => row.length > max ? row.length : max, -1)
-        const hasMonster = arr => {
+        const findMonsters = arr => {
             let foundMonster = false
             arr.forEach((row, rowIndex) => {
                 if (arr.length >= rowIndex + seaMonster.length) {
@@ -106,7 +106,7 @@ function solve(input, part) {
         })
         actions.find(action => {
             assembled = action(assembled)
-            const check = hasMonster(assembled)
+            const check = findMonsters(assembled)
             if (check) {
                 assembled = check
                 return true
