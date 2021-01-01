@@ -9,6 +9,13 @@ function solve(input, part) {
             }
         }
     }
+    const calcScore = cards => {
+        let res = 0
+        for (let i = cards.length; i > 0; i--) {
+            res += i * cards[cards.length - i]
+        }
+        return res
+    }
     if (part === 1) {
         const combat = (player1, player2) => {
             while (player1.length > 0 && player2.length > 0) {
@@ -25,12 +32,7 @@ function solve(input, part) {
                 return player1
             }
         }
-        const cards = combat(input[0], input[1])
-        let res = 0
-        for (let i = cards.length; i > 0; i--) {
-            res += i * cards[cards.length - i]
-        }
-        return res
+        return calcScore(combat(input[0], input[1]))
     } else {
         const cardsEqual = (cardsA, cardsB) => {
             for (let i = 0; i < cardsA.length; i++) {
@@ -71,12 +73,7 @@ function solve(input, part) {
                 return [1, player1]
             }
         }
-        const cards = recCombat(input[0], input[1])[1]
-        let res = 0
-        for (let i = cards.length; i > 0; i--) {
-            res += i * cards[cards.length - i]
-        }
-        return res
+        return calcScore(recCombat(input[0], input[1])[1])
     }
 }
 
