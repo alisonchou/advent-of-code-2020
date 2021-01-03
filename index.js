@@ -28,7 +28,9 @@ const runPart = part => {
     }
 }
 
-if (inputs.length === 1) {
+if (day === 25) {
+    runPart(1)
+} else if (inputs.length === 1) {
     runPart(1)
     runPart(2)
 } else {
